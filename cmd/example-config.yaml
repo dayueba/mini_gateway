@@ -1,0 +1,13 @@
+port: 7100
+heartbeat: 60
+bucketCount: 512
+bucketWorkerCount: 32
+dispatchChannelSize: 10000
+maxMergerDelay: 1000
+maxMergerBatchSize: 100
+mergerWorkerCount: 32
+mergerChannelSize: 1000
+maxJoinRoom: 5
+dispatchWorkerCount: 32
+BucketJobChannelSize: 1000
+bucketJobWorkerCount: 32
