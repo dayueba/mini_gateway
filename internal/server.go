@@ -20,7 +20,14 @@ var (
 	curConnId uint64
 )
 
-func InitServer(c *Config) (err error) {
+type Server struct {
+	ginServer *gin.Engine
+	conf      *Config
+	// state server client
+	// maybe a grpc client
+}
+
+func InitServer(c *Config) *Server {
 	r := gin.Default()
 	// ws
 	r.GET("/connect", func(ctx *gin.Context) {
@@ -85,5 +92,14 @@ func InitServer(c *Config) (err error) {
 		//	} }
 	})
 
-	return r.Run(fmt.Sprintf(":%d", c.Port))
+	srv := &Server{
+		ginServer: r,
+		conf:      c,
+	}
+
+	return srv
+}
+
+func (srv *Server) Run() error {
+	return srv.ginServer.Run(fmt.Sprintf(":%d", srv.conf.Port))
 }

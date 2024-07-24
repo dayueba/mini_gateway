@@ -4,6 +4,8 @@ import (
 	"flag"
 	"github.com/dayueba/mini_gateway/internal"
 	"log"
+
+	_ "go.uber.org/automaxprocs"
 )
 
 var (
@@ -32,7 +34,8 @@ func main() {
 	}
 
 	// init server
-	if err = internal.InitServer(conf); err != nil {
+	srv := internal.InitServer(conf)
+	if err = srv.Run(); err != nil {
 		log.Fatalln(err)
 	}
 }
